@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup - Electronix</title>
+  <!-- Tailwind CSS CDN link -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <!-- Signup Form Container -->
+  <div class="form-container bg-white p-8 rounded-lg shadow-lg w-full sm:w-96 space-y-6">
+    <!-- Logo Section -->
+    <div class="text-center mb-6">
+      <a href="/index.html">
+        <img class="mx-auto h-20" src="/public/logo.png" alt="Electronix Logo">
+      </a>
+    </div>
+
+    <!-- Title -->
+    <h2 class="text-2xl font-semibold text-gray-800 text-center">Sign Up</h2>
+
+    <!-- Signup Form -->
+    <form id="signupForm" class="space-y-4" action="/Ocs/php/database.php" method="POST">
+      <!-- Full Name Input -->
+      <div class="flex flex-col">
+        <input type="text" id="name" name="name" placeholder="Full Name" required class="border-2 border-gray-300 rounded-lg p-3 mt-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+      </div>
+
+      <!-- Email Input -->
+      <div class="flex flex-col">
+        <input type="email" id="email" name="email" placeholder="Email" required class="border-2 border-gray-300 rounded-lg p-3 mt-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+      </div>
+
+      <!-- Password Input -->
+      <div class="flex flex-col">
+        <input type="password" id="password" name="password" placeholder="Password" required class="border-2 border-gray-300 rounded-lg p-3 mt-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+      </div>
+
+      <!-- Role Selection -->
+      <div class="flex flex-col">
+        <label for="signupRole" class="text-gray-600">I am a:</label>
+        <select id="signupRole" name="role" required class="border-2 border-gray-300 rounded-lg p-3 mt-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <option value="user">User</option>
+          <option value="engineer">Engineer</option>
+        </select>
+      </div>
+
+      <!-- Signup Button -->
+      <div class="flex justify-center">
+        <button type="submit" class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">Sign Up</button>
+      </div>
+      
+      <!-- Switch to Login Link -->
+      <p class="text-center text-gray-600 text-sm">Already have an account? <a href="login.html" class="text-blue-500 hover:underline">Login here</a></p>
+    </form>
+  </div>
+
+  <script src="app.js"></script> <!-- External JS for form logic -->
+</body>
+</html>
