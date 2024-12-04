@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Profile</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
+
   <!-- Favicon Links -->
   <link rel="icon" href="/public/favico/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/public/favico/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -20,7 +21,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
       <h1 class="text-3xl font-bold">User Profile</h1>
       <nav>
-        <a href="index.html" class="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition">Log Out</a>
+        <a href="/Ocs/index.html" class="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition">Log Out</a>
       </nav>
     </div>
   </header>
@@ -38,9 +39,36 @@
           <button class="w-full text-lg font-medium text-left py-3 px-5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none transition"
             onclick="toggleDropdown('placeComplaint')">Place a Complaint</button>
           <div id="placeComplaint" class="dropdown-content hidden mt-4">
-            <textarea id="complaintText" placeholder="Describe your issue here..." rows="5" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
-            <button class="mt-4 w-full py-2 px-4 bg-green-500 text-white rounded-lg hover:bg-green-600 focus:outline-none transition"
-              onclick="placeComplaint()">Submit Complaint</button>
+            <form action="/Ocs/php/contact.php" name="contact" method="post" role="form" class="php-email-form space-y-6">
+              <!-- Name and Email -->
+              <div class="flex space-x-4">
+                <div class="flex-1">
+                  <label for="name" class="block text-sm font-medium text-gray-700">Your Name</label>
+                  <input type="text" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="flex-1">
+                  <label for="email" class="block text-sm font-medium text-gray-700">Your Email</label>
+                  <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" name="email" id="email" placeholder="Your Email" required>
+                </div>
+              </div>
+
+              <!-- Subject -->
+              <div class="form-group">
+                <label for="subject" class="block text-sm font-medium text-gray-700">Subject</label>
+                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" name="subject" id="subject" placeholder="Subject" required>
+              </div>
+
+              <!-- Message -->
+              <div class="form-group">
+                <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" name="message" rows="5" placeholder="Describe your issue..." required></textarea>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="text-center">
+                <button type="submit" class="w-full py-3 px-6 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none transition">Submit Complaint</button>
+              </div>
+            </form>
           </div>
         </div>
 
@@ -52,11 +80,27 @@
             <section id="complaintHistory" class="space-y-4"></section>
           </div>
         </div>
+
+        <!-- Speak to Engineer Tab -->
+        <div class="tab">
+          <button class="w-full text-lg font-medium text-left py-3 px-5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none transition"
+            onclick="toggleDropdown('speakToEngineer')">Speak to an Engineer</button>
+          <div id="speakToEngineer" class="dropdown-content hidden mt-4">
+            <p>Call our professional to handle your complaints on: 050-111-294</p>
+          </div>
+        </div>
       </div>
     </div>
   </main>
 
   <script src="/Ocs/js/app.js"></script>
+  <script>
+    // Example of toggleDropdown function (to show/hide dropdowns)
+    function toggleDropdown(id) {
+      const element = document.getElementById(id);
+      element.classList.toggle('hidden');
+    }
+  </script>
 </body>
 
 </html>

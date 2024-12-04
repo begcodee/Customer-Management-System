@@ -20,68 +20,6 @@ function toggleDropdown(sectionId) {
   }
 }
 
-// Login Functionality
-document.getElementById('loginForm')?.addEventListener('submit', function (e) {
-  e.preventDefault();
-
-  const loginType = document.getElementById('loginType').value;
-  const identifier = document.getElementById('identifier').value.trim();
-  const password = document.getElementById('password').value.trim();
-
-  if (loginType === 'user') {
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const user = users.find(u => u.email === identifier && u.password === password);
-
-    if (user) {
-      alert(`Welcome, ${user.name}!`);
-      localStorage.setItem('currentUser', JSON.stringify(user)); // Store logged-in user
-      window.location.href = 'user-profile.html'; // Redirect to user profile
-    } else {
-      alert('Invalid email or password.');
-    }
-  } else if (loginType === 'engineer') {
-      const engineers = JSON.parse(localStorage.getItem('engineers')) || [];
-      const engineer = engineers.find(e => e.id === identifier && e.password === password);
-  
-      if (engineer) {
-        alert(`Welcome, ${engineer.name}!`);
-        localStorage.setItem('currentEngineer', JSON.stringify(engineer)); // Store logged-in engineer
-        window.location.href = 'engineer-profile.html';
-      } else {
-        alert('Invalid Engineer ID or password.');
-      }
-    }
-  });
-
-// Signup Functionality
-document.getElementById('signupForm')?.addEventListener('submit', function (e) {
-  e.preventDefault();
-
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value.trim();
-  const role = document.getElementById('signupRole').value;
-
-  if (role === 'user') {
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    if (users.some(u => u.email === email)) {
-      alert('User with this email already exists!');
-    } else {
-      users.push({ id: users.length + 1, name, email, password });
-      localStorage.setItem('users', JSON.stringify(users));
-      alert('Signup successful! You can now log in.');
-      window.location.href = 'login.html';
-    }
-  } else if (role === 'engineer') {
-    const engineers = JSON.parse(localStorage.getItem('engineers')) || [];
-    const newEngineerId = `Engineer${engineers.length + 1}`;
-    engineers.push({ id: newEngineerId, name, email, password });
-    localStorage.setItem('engineers', JSON.stringify(engineers));
-
-    alert(`Signup successful! Your Engineer ID is: ${newEngineerId}. Please note it for login.`);
-    window.location.href = 'login.html';
-  }
-});
 
 // Place a Complaint (User)
 function placeComplaint() {
@@ -213,15 +151,17 @@ console.log("Engineer Name Element:", document.getElementById('engineerName'));
 console.log("Current Engineer:", currentEngineer);
 console.log("HTML Content:", document.body.innerHTML);
 
+const link = new URL('ocs/php/get_complaints.php'); // Define the URL for the PHP script
 
-// window.onload = function () {
-//   if (currentUser) {
-//     document.getElementById('userName').textContent = currentUser.name;
-//     loadUserComplaints();
-//   }
-
-//   if (currentEngineer) {
-//     document.getElementById('engineerName').textContent = currentEngineer.name; // Fix engineerName display
-//     loadAllComplaints();
-//   }
-// };
+function getCompliants() {
+  // Perform AJAX request to fetch complaints from the server
+  fetch(link) // Pass the link directly without curly braces
+    .then(response => response.text())
+    .then(data => {
+      // Display the returned complaints in the container
+      document.getElementById('complaintContainer').innerHTML = data;
+    })
+    .catch(error => {
+      console.error('Error fetching complaints:', error);
+    });
+};

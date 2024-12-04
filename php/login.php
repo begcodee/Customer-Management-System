@@ -39,8 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user_role'] = $user['role'];
 
             // Redirect to dashboard or home page based on role
-            if ($user['role'] == 'enginer') {
-                header("Location: /Ocs/routes-page/engineer-profile.html");
+            if ($user['role'] == 'engineer') {
+                header("Location: /Ocs/routes-page/engineer-profile.php");
             } else {
                 header("Location: /Ocs/routes-page/user-profile.html");
             }
